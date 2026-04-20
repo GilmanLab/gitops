@@ -8,15 +8,14 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/GilmanLab/platform.git
-    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
-    path: bootstrap/cilium
-    directory:
-      recurse: false
-      include: "*.yaml"
+    repoURL: ghcr.io/gilmanlab/platform/bootstrap
+    chart: cilium
+    targetRevision: 1.1.0
+    helm:
+      releaseName: cilium
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: kube-system
   syncPolicy:
     automated:
       prune: true
@@ -33,12 +32,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/GilmanLab/platform.git
-    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
-    path: bootstrap/argocd
-    directory:
-      recurse: false
-      include: "*.yaml"
+    repoURL: ghcr.io/gilmanlab/platform/bootstrap
+    chart: argocd
+    targetRevision: 1.0.1
+    helm:
+      releaseName: argocd
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -47,7 +45,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=false
+      - CreateNamespace=true
       - ServerSideApply=true
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -58,19 +56,18 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/GilmanLab/platform.git
-    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
-    path: bootstrap/kro
-    directory:
-      recurse: false
-      include: "*.yaml"
+    repoURL: ghcr.io/gilmanlab/platform/bootstrap
+    chart: kro
+    targetRevision: 1.0.1
+    helm:
+      releaseName: kro
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: kro-system
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=false
+      - CreateNamespace=true
       - ServerSideApply=true
