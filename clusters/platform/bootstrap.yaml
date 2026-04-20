@@ -1,0 +1,76 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-cilium
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/GilmanLab/platform.git
+    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
+    path: bootstrap/cilium
+    directory:
+      recurse: false
+      include: "*.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-argocd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/GilmanLab/platform.git
+    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
+    path: bootstrap/argocd
+    directory:
+      recurse: false
+      include: "*.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-kro
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/GilmanLab/platform.git
+    targetRevision: e9a2ed85255af83f8435c35b0086fe6a42f5aebe
+    path: bootstrap/kro
+    directory:
+      recurse: false
+      include: "*.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
