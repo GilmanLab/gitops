@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: ghcr.io/gilmanlab/platform/bootstrap
     chart: cilium
-    targetRevision: 1.1.0
+    targetRevision: 1.2.0
     helm:
       releaseName: cilium
   destination:
@@ -34,7 +34,7 @@ spec:
   source:
     repoURL: ghcr.io/gilmanlab/platform/bootstrap
     chart: argocd
-    targetRevision: 1.0.1
+    targetRevision: 1.1.0
     helm:
       releaseName: argocd
   destination:
@@ -58,7 +58,7 @@ spec:
   source:
     repoURL: ghcr.io/gilmanlab/platform/bootstrap
     chart: kro
-    targetRevision: 1.0.1
+    targetRevision: 1.1.0
     helm:
       releaseName: kro
   destination:
