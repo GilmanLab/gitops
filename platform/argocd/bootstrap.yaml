@@ -4,7 +4,7 @@ metadata:
   name: platform-bootstrap-root
   namespace: argocd
 spec:
-  project: default
+  project: platform-bootstrap
   source:
     repoURL: https://github.com/GilmanLab/gitops.git
     targetRevision: master
